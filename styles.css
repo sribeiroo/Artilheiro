@@ -1,0 +1,130 @@
+/* Estilos gerais */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('campo-futebol.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #000; /* Alterado para preto */
+}
+h2 {
+    text-align: center;
+    margin: 20px 0;
+    color: #000; /* Alterado para preto */
+}
+
+/* Ranking Container */
+.ranking-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 20px;
+}
+
+#ranking-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#ranking-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#ranking-list li:last-child {
+    border-bottom: none;
+}
+
+#ranking-list img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.info a {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #000; /* Nome do jogador em preto */
+}
+
+.info a:hover {
+    color: #444; /* Cor ao passar o mouse */
+}
+
+.gols {
+    margin-left: auto;
+    font-size: 16px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* Página do Perfil do Jogador */
+.perfil-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 20px;
+}
+
+.perfil-container h1 {
+    font-size: 28px;
+    text-align: center;
+    color: #000; /* Título do jogador em preto */
+    margin-bottom: 20px;
+}
+
+.perfil-container .nome {
+    font-size: 22px;
+    text-align: center;
+    color: #000; /* Nome do jogador em preto */
+    margin-bottom: 10px;
+}
+
+.perfil-container img {
+    display: block;
+    margin: 0 auto 20px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.perfil-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    text-align: center;
+}
+
+.calendario {
+    font-size: 16px;
+    text-align: center;
+    color: #000; /* Calendário em preto */
+    margin-top: 20px;
+}
+
+
+
+
+
+
+
+

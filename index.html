@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Artilharia 1º Sem. Temporada 2025</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="ranking-container">
+        <h1>Artilharia </h1>
+       <h2> 1º Sem. Temporada 2025</h2>
+        <ul id="ranking-list">
+            <!-- Jogadores serão ordenados automaticamente -->
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador1/padrao.jogador.jpg.webp" alt="Foto do Jogador 1">
+                <div class="info">
+                    <a href="jogador1.html">Almir Rodrigo</a>
+                </div>
+                <span class="gols">0 gols</span>
+                
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador2/padrão.jogador.webp" alt="Foto do Jogador 2">
+                <div class="info">
+                    <a href="jogador2.html">Cristiano</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador3/padrão.jogador.webp" alt="Foto do Jogador 3">
+                <div class="info">
+                    <a href="jogador3.html">Cezar</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador4/padrão.jogador.webp" alt="Foto do Jogador 4">
+                <div class="info">
+                    <a href="jogador4.html">CR7</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador5/padrão.jogador.webp" alt="Foto do Jogador 5">
+                <div class="info">
+                    <a href="jogador5.html">F.Santos</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador7/padrão.jogador.webp" alt="Foto do Jogador 6">
+                <div class="info">
+                    <a href="jogador6.html">Guilherme</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador7/padrão.jogador.webp" alt="Foto do Jogador 7">
+                <div class="info">
+                    <a href="jogador7.html">Japa</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador8/padrão.jogador.webp" alt="Foto do Jogador 8">
+                <div class="info">
+                    <a href="jogador8.html">Juan</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador9/padrão.jogador.webp" alt="Foto do Jogador 9">
+                <div class="info">
+                    <a href="jogador9.html">Léo</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="2">
+                <img src="Imagens Jogadores/imagem jogador10/padrão.jogador.webp" alt="Foto do Jogador 10">
+                <div class="info">
+                    <a href="jogador10.html">Matheus</a>
+                </div>
+                <span class="gols">2 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador11/padrão.jogador.webp" alt="Foto do Jogador 11">
+                <div class="info">
+                    <a href="jogador11.html">Willian</a>
+                </div>
+                <span class="gols">0 gols</span>
+            </li>
+            <li data-gols="0">
+                <img src="Imagens Jogadores/imagem jogador12/padrão.jogador.webp" alt="Foto do Jogador 12">
+                <div class="info">
+                    <a href="jogador12.html">Xande</a>
+                </div>
+                <span class="gols">0 gols</span>
+        </ul>
+    </div>
+
+    <script>
+        // Função para ordenar os jogadores pelo número de gols
+        function ordenarRanking() {
+            const lista = document.getElementById('ranking-list');
+            const jogadores = Array.from(lista.children);
+
+            // Ordena os itens em ordem decrescente de gols
+            jogadores.sort((a, b) => {
+                const golsA = parseInt(a.getAttribute('data-gols'));
+                const golsB = parseInt(b.getAttribute('data-gols'));
+                return golsB - golsA; // Ordem decrescente
+            });
+
+            // Reanexa os itens na lista na nova ordem
+            jogadores.forEach(jogador => lista.appendChild(jogador));
+        }
+
+        // Executa a ordenação ao carregar a página
+        window.onload = ordenarRanking;
+    </script>
+
+    
+</body>
+</html>
+
+
+
+
+
+
+
