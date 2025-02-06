@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Jogador</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('Campo-futebol.jpg'); /* Substitua com o link correto para a imagem de fundo */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            margin: 0;
+        }
+
+        .perfil {
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com leve transparência */
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .perfil img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid #fff;
+        }
+
+        .perfil h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #000; /* Cor do título alterada para preto */
+        }
+
+        .perfil p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #000; /* Cor do "Jogador" alterada para preto */
+        }
+
+        .calendario {
+            margin-top: 20px;
+            width: 100%;
+            display: inline-block;
+            font-size: 14px;
+            border-collapse: collapse;
+            text-align: center;
+            color: #000; /* Cor do calendário alterada para preto */
+        }
+
+        .calendario th, .calendario td {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .calendario th {
+            background-color: #f4f4f4;
+        }
+
+        .calendario .sexta {
+            background-color: #28a745; /* Verde para sextas-feiras */
+            color: white;
+        }
+
+        .calendario .dia:hover {
+            background-color: #ddd;
+        }
+
+        .video-container {
+            margin-top: 20px;
+            display: none; /* Escondido inicialmente */
+        }
+
+        .video-container video {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .gols-btn {
+            cursor: pointer;
+            color: #007BFF;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .gols-list {
+            margin-top: 10px;
+            display: none;
+        }
+
+        .gols-list button {
+            margin: 5px;
+            padding: 5px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .gols-list button:hover {
+            background-color: #0056b3;
+        }
+
+        .voltar {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+    </style>
+    <script>
+        let dataSelecionada = null;
+
+        // Função para carregar o vídeo do gol
+        function carregarGol(videoPath) {
+            const videoPlayer = document.getElementById('video-player');
+            videoPlayer.src = videoPath;
+            videoPlayer.load();
+            videoPlayer.play();
+            document.querySelector('.video-container').style.display = 'block'; // Exibe o player
+        }
+
+        // Função para gerar o calendário do mês
+        function gerarCalendario() {
+            const calendario = document.getElementById('calendario');
+            const data = new Date();
+            const mes = data.getMonth(); // Mês atual (0 = Janeiro, 1 = Fevereiro, ...)
+            const ano = data.getFullYear();
+            const primeiroDia = new Date(ano, mes, 1);
+            const ultimoDia = new Date(ano, mes + 1, 0);
+
+            // Limpar o calendário anterior
+            calendario.innerHTML = '';
+
+            // Gerar os dias da semana
+            const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            const header = document.createElement('tr');
+            diasDaSemana.forEach(dia => {
+                const diaSemana = document.createElement('th');
+                diaSemana.textContent = dia;
+                header.appendChild(diaSemana);
+            });
+            calendario.appendChild(header);
+
+            // Preencher o calendário com os dias do mês
+            let linha = document.createElement('tr');
+            for (let i = 0; i < primeiroDia.getDay(); i++) {
+                linha.appendChild(document.createElement('td')); // Adiciona células vazias
+            }
+
+            for (let dia = 1; dia <= ultimoDia.getDate(); dia++) {
+                const diaElemento = document.createElement('td');
+                const dataDia = new Date(ano, mes, dia);
+
+                // Marcar a sexta-feira
+                if (dataDia.getDay() === 5) {
+                    diaElemento.className = 'sexta dia';
+                    diaElemento.onclick = function() {
+                        dataSelecionada = dataDia.toISOString().split('T')[0]; // Armazena a data selecionada
+                        mostrarGols(dataSelecionada); // Exibe os gols da data
+                        carregarGol(''); // Limpa o vídeo
+                        minimizarCalendario();
+                    };
+                } else {
+                    diaElemento.className = 'dia';
+                    diaElemento.onclick = function() {
+                        dataSelecionada = dataDia.toISOString().split('T')[0]; // Armazena a data selecionada
+                        mostrarGols(dataSelecionada); // Exibe os gols da data
+                        carregarGol(''); // Limpa o vídeo
+                        minimizarCalendario();
+                    };
+                }
+
+                diaElemento.textContent = dia;
+                linha.appendChild(diaElemento);
+
+                // Quando a linha estiver cheia (7 dias), adiciona a linha e cria uma nova
+                if (linha.children.length === 7) {
+                    calendario.appendChild(linha);
+                    linha = document.createElement('tr');
+                }
+            }
+
+            // Se a última linha não estiver completa, preenche com células vazias
+            if (linha.children.length > 0) {
+                for (let i = linha.children.length; i < 7; i++) {
+                    linha.appendChild(document.createElement('td'));
+                }
+                calendario.appendChild(linha);
+            }
+        }
+
+        // Função para minimizar o calendário
+        function minimizarCalendario() {
+            const calendario = document.getElementById('calendario');
+            calendario.style.display = 'none'; // Esconde o calendário após clicar em um dia
+            document.querySelector('.video-container').style.display = 'block'; // Exibe o player de vídeo
+            document.querySelector('.gols-list').style.display = 'block'; // Exibe a lista de gols
+        }
+
+        // Função para exibir/esconder o calendário
+        function toggleCalendario() {
+            const calendario = document.getElementById('calendario');
+            const videoContainer = document.querySelector('.video-container');
+            const listaGols = document.querySelector('.gols-list');
+
+            // Se o calendário estiver visível, minimize o player e esconda os gols
+            if (calendario.style.display === 'none' || calendario.style.display === '') {
+                calendario.style.display = 'block';
+                videoContainer.style.display = 'none'; // Esconde o player
+                listaGols.style.display = 'none'; // Esconde os gols
+            } else {
+                calendario.style.display = 'none';
+            }
+        }
+
+        // Função para mostrar os gols disponíveis para a data selecionada
+        function mostrarGols(data) {
+            const gols = {
+                '2025-01-2': [
+                    { descricao: 'Gol 1', video: 'Videos/jogador12.gols/gol1.mp4' },
+                    { descricao: 'Gol 2', video: 'Videos/jogador12.gols/gol2.mp4' }
+                ],
+                '2025-01-3': [
+                    { descricao: 'Gol 1', video: 'Videos/jogador1_gol3.mp4' },
+                ],
+                // Adicione mais datas e gols conforme necessário
+            };
+
+            const listaGols = document.getElementById('gols-lista');
+            listaGols.innerHTML = ''; // Limpar a lista de gols anteriores
+            const listaDeGols = gols[data] || [];
+
+            if (listaDeGols.length > 0) {
+                listaDeGols.forEach(gol => {
+                    const button = document.createElement('button');
+                    button.textContent = gol.descricao;
+                    button.onclick = function() {
+                        carregarGol(gol.video);
+                    };
+                    listaGols.appendChild(button);
+                });
+            } else {
+                const noGols = document.createElement('p');
+                noGols.textContent = 'Nenhum gol registrado para esta data.';
+                listaGols.appendChild(noGols);
+            }
+
+            listaGols.style.display = 'block'; // Exibe a lista de gols
+        }
+
+        // Inicializa o calendário ao carregar a página
+        window.onload = gerarCalendario;
+    </script>
+</head>
+<body>
+    <div class="perfil">
+        <img src="Imagens Jogadores/imagem jogador10/padrão.jogador.webp" alt="Avatar do Jogador">
+        <h2>Lé Góes</h2>
+        <p>Jogador</p>
+        <button class="gols-btn" onclick="toggleCalendario()">Gols</button>
+        <table id="calendario" class="calendario"></table>
+        <div class="video-container">
+            <video id="video-player" controls>
+                <source src="" type="video/mp4">
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
+        </div>
+        <div id="gols-lista" class="gols-list"></div>
+        <a href="index.html" class="voltar">Voltar a Artilharia</a>
+    </div>
+</body>
+</html>
